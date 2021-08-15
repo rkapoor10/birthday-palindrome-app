@@ -9,7 +9,7 @@ export default function App() {
   const [format, setFormat] = useState("");
   const [newDate, setNewDate] = useState([0, 0, 0]);
   const [days, setDays] = useState(0);
-  const [output, setOutput] = useState(["none", "none"]);
+  const [output, setOutput] = useState(["none", "none", "none"]);
 
   let count = -1;
 
@@ -23,12 +23,18 @@ export default function App() {
 
     let ans = checkForAll(dd, mm, yyyy);
     if (ans === 1) {
-      setOutput(["block", "none"]);
+      setOutput(["none", "none", "block"]);
+      setTimeout(() => {
+        setOutput(["block", "none", "none"]);
+      }, 3000);
     } else {
       let find = findNearest(dd, mm, yyyy);
       if (find === 1) {
-        setDays(count);
-        setOutput(["none", "block"]);
+        setOutput(["none", "none", "block"]);
+        setTimeout(() => {
+          setDays(count);
+          setOutput(["none", "block", "none"]);
+        }, 3000);
       } else console.log("Not found", find);
     }
   }
@@ -147,19 +153,66 @@ export default function App() {
             required
           ></input>
 
-          <button type="submit">click</button>
+          <button type="submit">check</button>
         </form>
 
-        <p style={{ display: `${output[0]}` }}>
+        <div className="gif-style" style={{ display: `${output[2]}` }}>
+          <img height="150px" width="150px" src={loadGif} alt="" />
+          <p>crunching numbers....</p>
+        </div>
+
+        <p className="container" style={{ display: `${output[0]}` }}>
           {date} is a palindrome in {format} format 🥳🥳
         </p>
 
-        <p style={{ display: `${output[1]}` }}>
-          {date} is not a palindrome. The nearest palindrome is found after{" "}
+        <p className="container" style={{ display: `${output[1]}` }}>
+          {date} is NOT a palindrome 😢😢. The nearest palindrome is found after{" "}
           {days} days for date {ansFormat[0]}-{ansFormat[1]}-{ansFormat[2]} in{" "}
           {format} format
         </p>
       </div>
+      <footer className="container">
+        <ul>
+          <li>
+            <a
+              target="_blank"
+              href="https://github.com/rkapoor10/stocks-calculator"
+            >
+              <img
+                src="https://img.icons8.com/ios-glyphs/30/000000/github.png"
+                alt=""
+              />
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/ritik-kapoor-493469196/"
+              target="blank"
+            >
+              <img
+                src="https://img.icons8.com/ios-filled/30/000000/linkedin.png"
+                alt=""
+              />
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/ritikkapoor.10/" target="blank">
+              <img
+                src="https://img.icons8.com/ios-glyphs/30/000000/instagram-circle.png"
+                alt=""
+              />
+            </a>
+          </li>
+          <li>
+            <a href="https://ritikportfolio.netlify.app/" target="blank">
+              <img
+                src="https://img.icons8.com/ios-filled/30/000000/resume-website.png"
+                alt=""
+              />
+            </a>
+          </li>
+        </ul>
+      </footer>
     </div>
   );
 }
