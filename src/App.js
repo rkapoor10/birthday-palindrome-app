@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import loadGif from "./gif/loading.gif";
+import loadGif from "./gif/loading.svg";
 
 import "./styles.css";
 
